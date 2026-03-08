@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keiko Roy-Carey</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep:    #1C3542;
+  --ocean:   #2A5168;
+  --tide:    #4A7F96;
+  --mist:    #7AADB8;
+  --seafoam: #A8C9D0;
+  --linen:   #F4F0E8;
+  --white:   #FDFAF7;
+  --amber:   #C97A3A;
+  --dust:    #9A8A7A;
+  --ink:     #1E3040;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+#home, #about, #offerings, #projects, #connect, #reach-out {
+  scroll-margin-top: 72px;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 52px;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+nav.scrolled {
+  background: rgba(253,250,247,0.96);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(42,81,104,0.12);
+}
+.nav-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  transition: color 0.4s;
+}
+nav.scrolled .nav-name { color: var(--deep); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 0.67rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(168,201,208,0.85);
+  text-decoration: none;
+  padding: 4px 0;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.28s;
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+nav.scrolled .nav-links a { color: rgba(42,81,104,0.7); }
+.nav-links a:hover { color: var(--seafoam); }
+nav.scrolled .nav-links a:hover { color: var(--tide); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(150deg, var(--deep) 0%, var(--ocean) 45%, var(--tide) 75%, #5E9BAA 100%);
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+#heroCanvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 1;
+}
+.hero-content {
+  flex: 1; display: flex; align-items: flex-end;
+  padding: 140px 52px 64px;
+  position: relative; z-index: 2;
+}
+.hero-text { max-width: 740px; }
+.hero-eyebrow {
+  font-size: 0.63rem; font-weight: 500;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--seafoam); margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp 0.9s 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: ''; width: 30px; height: 1px;
+  background: var(--seafoam); opacity: 0.6;
+}
+.hero-site-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5vw, 5rem);
+  font-weight: 300; line-height: 1.05; color: #fff;
+  letter-spacing: -0.01em; margin-bottom: 22px;
+  opacity: 0; animation: fadeUp 1s 0.4s forwards;
+}
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 1.8vw, 1.26rem);
+  font-style: italic; color: rgba(255,255,255,0.72);
+  max-width: 600px; line-height: 1.68; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 1s 0.6s forwards;
+}
+.hero-tagline {
+  font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(168,201,208,0.55); margin-bottom: 48px;
+  opacity: 0; animation: fadeUp 1s 0.75s forwards;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #fff; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  padding-bottom: 5px;
+  transition: gap 0.25s, border-color 0.25s;
+  opacity: 0; animation: fadeUp 1s 0.9s forwards;
+}
+.hero-cta:hover { gap: 20px; border-color: rgba(255,255,255,0.9); }
+.hero-wave { position: relative; z-index: 2; line-height: 0; }
+.hero-wave svg { display: block; width: 100%; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SHARED ── */
+.spad { padding: 104px 52px; }
+.wrap { max-width: 1060px; margin: 0 auto; }
+.kicker {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--tide); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.kicker::after { content: ''; width: 30px; height: 1px; background: currentColor; opacity: 0.45; }
+.heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 300; line-height: 1.1;
+  color: var(--deep); margin-bottom: 8px;
+}
+.heading em { font-style: italic; color: var(--tide); }
+.wave-sep { display: block; line-height: 0; overflow: hidden; }
+.wave-sep svg { display: block; width: 100%; }
+
+/* ── ABOUT ── */
+.about { background: var(--white); }
+.about-photo-top {
+  width: 100%; max-width: 320px;
+  aspect-ratio: 3/4; margin-bottom: 36px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  display: block;
+}
+.about-photo-top img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 72px; align-items: start; margin-top: 56px;
+}
+.photo-placeholder {
+  width: 100%; aspect-ratio: 3/4;
+  background: linear-gradient(160deg, rgba(74,127,150,0.12) 0%, rgba(74,127,150,0.04) 100%);
+  border: 1.5px dashed rgba(74,127,150,0.28);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px; margin-bottom: 28px;
+}
+.photo-placeholder-icon {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: rgba(74,127,150,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+.photo-placeholder-label {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(74,127,150,0.5); text-align: center; line-height: 1.7;
+}
+.name-story {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.18rem; font-weight: 400;
+  line-height: 1.8; color: var(--deep); margin-bottom: 22px;
+}
+.spell { font-style: italic; color: var(--tide); }
+.interbeing {
+  background: rgba(74,127,150,0.09);
+  border-bottom: 1px solid rgba(74,127,150,0.4);
+  padding: 0 3px; font-style: italic;
+}
+.about-para {
+  font-size: 0.97rem; line-height: 1.92;
+  color: rgba(30,48,64,0.68); margin-bottom: 18px;
+}
+.read-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--tide); padding: 0; margin-top: 6px;
+  transition: gap 0.2s;
+}
+.read-btn:hover { gap: 14px; }
+.read-btn .arr { transition: transform 0.35s; display: inline-block; }
+.read-btn.open .arr { transform: rotate(180deg); }
+.expandable { max-height: 0; overflow: hidden; transition: max-height 0.65s cubic-bezier(0.4,0,0.2,1); }
+.expandable.open { max-height: 1400px; }
+.expandable .about-para { margin-top: 22px; }
+
+.about-aside { position: sticky; top: 88px; }
+.pull-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-style: italic; font-weight: 300;
+  color: var(--deep); line-height: 1.54;
+  padding: 28px 26px;
+  border: 1px solid rgba(74,127,150,0.2);
+  background: rgba(74,127,150,0.04);
+  position: relative; margin-bottom: 28px;
+}
+.pull-quote::before {
+  content: '\201C';
+  font-size: 4.8rem; color: var(--seafoam); opacity: 0.28;
+  position: absolute; top: -16px; left: 14px;
+  font-family: 'Cormorant Garamond', serif; line-height: 1;
+}
+.roots { border-top: 1px solid rgba(74,127,150,0.14); padding-top: 22px; }
+.roots-label {
+  font-size: 0.59rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--tide); margin-bottom: 12px;
+}
+.roots-list {
+  font-size: 0.78rem; color: var(--dust);
+  line-height: 2.1; padding-left: 12px;
+  border-left: 1px solid rgba(74,127,150,0.18);
+}
+
+/* ── OFFERINGS ── */
+.offerings { background: var(--linen); }
+.offerings-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-style: italic; color: var(--dust);
+  max-width: 480px; line-height: 1.7;
+  margin-top: 10px; margin-bottom: 52px;
+}
+.o-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.o-card {
+  background: var(--white); padding: 48px 44px;
+  border: 1px solid rgba(74,127,150,0.1);
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.35s, box-shadow 0.35s;
+}
+.o-card:hover {
+  border-color: rgba(74,127,150,0.32);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(42,81,104,0.08);
+}
+.o-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--ocean), var(--seafoam));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+}
+.o-card:hover::before { transform: scaleX(1); }
+.o-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7rem; color: var(--seafoam);
+  letter-spacing: 0.14em; margin-bottom: 20px;
+}
+.o-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; font-weight: 300;
+  line-height: 1.22; color: var(--deep); margin-bottom: 10px;
+}
+.o-collab {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--tide); margin-bottom: 22px;
+}
+.o-collab a {
+  color: var(--tide); text-decoration: none;
+  border-bottom: 1px solid rgba(74,127,150,0.3);
+  transition: border-color 0.2s;
+}
+.o-collab a:hover { border-color: var(--tide); }
+.o-body { font-size: 0.9rem; line-height: 1.9; color: rgba(30,48,64,0.62); }
+.o-price {
+  margin-top: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.88rem; font-style: italic; color: var(--dust);
+}
+.o-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px; font-size: 0.66rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--tide); text-decoration: none;
+  border-bottom: 1px solid rgba(74,127,150,0.3);
+  padding-bottom: 3px;
+  transition: gap 0.2s, border-color 0.2s;
+}
+.o-cta:hover { border-color: var(--tide); gap: 14px; }
+.badge {
+  display: inline-block; margin-top: 16px;
+  font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; padding: 4px 11px;
+  border: 1px solid rgba(74,127,150,0.28); color: var(--mist);
+}
+
+/* ── PROJECTS ── */
+.projects-section { background: var(--deep); padding: 104px 52px; }
+.projects-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-style: italic;
+  color: rgba(168,201,208,0.48);
+  max-width: 520px; margin-top: 10px; margin-bottom: 52px; line-height: 1.7;
+}
+.p-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.p-card {
+  background: rgba(255,255,255,0.04); padding: 44px 36px;
+  border: 1px solid rgba(168,201,208,0.1);
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.35s, background 0.3s;
+}
+.p-card:hover {
+  border-color: rgba(168,201,208,0.3);
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-4px);
+}
+.p-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--tide), var(--seafoam));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.38s;
+}
+.p-card:hover::after { transform: scaleX(1); }
+.p-icon { font-size: 1.6rem; display: block; margin-bottom: 16px; }
+.p-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem; font-weight: 400; color: #fff; margin-bottom: 5px;
+}
+.p-role {
+  font-size: 0.6rem; font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--tide); margin-bottom: 16px;
+}
+.p-body { font-size: 0.86rem; line-height: 1.9; color: rgba(168,201,208,0.58); }
+.p-link {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+  font-size: 0.66rem; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--seafoam); text-decoration: none;
+  border-bottom: 1px solid rgba(168,201,208,0.28);
+  padding-bottom: 3px; transition: gap 0.2s, border-color 0.2s;
+}
+.p-link:hover { border-color: var(--seafoam); gap: 14px; }
+
+/* ── CONNECT ── */
+.closing {
+  background: var(--linen); text-align: center; padding: 112px 52px;
+  position: relative; overflow: hidden;
+}
+.closing::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px; height: 480px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,127,150,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.closing-kicker {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--mist); margin-bottom: 26px;
+}
+.closing-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+  font-weight: 300; font-style: italic; color: var(--deep);
+  max-width: 680px; margin: 0 auto 14px;
+  line-height: 1.36; position: relative; z-index: 1;
+}
+.closing-attr {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--dust); margin-bottom: 50px;
+}
+.closing-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.08rem; font-style: italic; color: rgba(30,48,64,0.5);
+  max-width: 500px; margin: 0 auto 48px; line-height: 1.74;
+  position: relative; z-index: 1;
+}
+.connect-actions {
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  position: relative; z-index: 1;
+}
+.connect-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; text-decoration: none;
+  color: var(--white); background: var(--ocean);
+  padding: 16px 42px; border: 1px solid var(--ocean);
+  transition: background 0.28s, color 0.28s, transform 0.28s;
+}
+.connect-btn:hover { background: transparent; color: var(--ocean); transform: translateY(-2px); }
+.connect-or {
+  font-size: 0.61rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--dust);
+}
+.connect-email {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.06rem; font-style: italic; color: var(--dust);
+}
+.connect-email a {
+  color: var(--tide); text-decoration: none;
+  border-bottom: 1px solid rgba(74,127,150,0.3);
+  transition: border-color 0.2s;
+}
+.connect-email a:hover { border-color: var(--tide); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--deep); padding: 38px 52px;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 20px;
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; color: rgba(244,240,232,0.45); letter-spacing: 0.1em;
+}
+.footer-sub {
+  font-size: 0.57rem; color: rgba(244,240,232,0.18);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
+}
+.footer-links { display: flex; gap: 24px; list-style: none; }
+.footer-links a {
+  font-size: 0.6rem; color: rgba(244,240,232,0.28);
+  text-decoration: none; letter-spacing: 0.12em;
+  text-transform: uppercase; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--seafoam); }
+
+/* ── REVEAL ── */
+.r { opacity: 0; transform: translateY(22px); transition: opacity 0.78s ease, transform 0.78s ease; }
+.r.in { opacity: 1; transform: none; }
+.r.d1 { transition-delay: 0.1s; }
+.r.d2 { transition-delay: 0.22s; }
+.r.d3 { transition-delay: 0.38s; }
+
+/* ── TESTIMONIALS ── */
+.testimonials { background: var(--white); }
+.testimonials-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-style: italic; color: var(--dust);
+  max-width: 480px; line-height: 1.7;
+  margin-top: 10px; margin-bottom: 36px;
+}
+.t-scroll-wrap {
+  position: relative;
+}
+.t-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px;
+  cursor: grab;
+}
+.t-track:active { cursor: grabbing; }
+.t-track::-webkit-scrollbar { height: 4px; }
+.t-track::-webkit-scrollbar-track { background: rgba(74,127,150,0.06); border-radius: 2px; }
+.t-track::-webkit-scrollbar-thumb { background: rgba(74,127,150,0.28); border-radius: 2px; }
+.t-card {
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  background: var(--linen); padding: 38px 34px;
+  border: 1px solid rgba(74,127,150,0.08);
+  position: relative;
+  transition: border-color 0.3s;
+}
+.t-card:hover { border-color: rgba(74,127,150,0.22); }
+.t-card::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem; line-height: 1;
+  color: var(--seafoam); opacity: 0.35;
+  position: absolute; top: 10px; left: 20px;
+}
+.t-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.02rem; font-style: italic;
+  line-height: 1.72; color: var(--deep);
+  position: relative; z-index: 1;
+  margin-bottom: 22px;
+}
+.t-name {
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--tide);
+}
+.t-nav {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 22px;
+}
+.t-arrow {
+  background: none; border: 1px solid rgba(74,127,150,0.28);
+  color: var(--tide); width: 36px; height: 36px;
+  border-radius: 50%; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.t-arrow:hover { background: rgba(74,127,150,0.08); border-color: var(--tide); }
+.t-arrow:disabled { opacity: 0.25; cursor: default; }
+.t-dots { display: flex; gap: 7px; align-items: center; }
+.t-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(74,127,150,0.22); cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  border: none; padding: 0;
+}
+.t-dot.active { background: var(--tide); transform: scale(1.3); }
+
+/* ── CUSTOM CURSOR ── */
+*, *::before, *::after { cursor: none !important; }
+#cur-dot {
+  position: fixed; pointer-events: none; z-index: 9999;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--seafoam);
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.25s, height 0.25s, background 0.25s;
+  top: 0; left: 0;
+}
+#cur-ring {
+  position: fixed; pointer-events: none; z-index: 9998;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid rgba(168,201,208,0.55);
+  transform: translate(-50%, -50%);
+  top: 0; left: 0;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s, top 0.08s linear, left 0.08s linear;
+}
+#cur-spiral-canvas {
+  position: fixed; pointer-events: none; z-index: 9997;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+}
+body.is-hovering #cur-dot {
+  width: 14px; height: 14px;
+  background: var(--amber);
+}
+body.is-hovering #cur-ring {
+  width: 54px; height: 54px;
+  border-color: rgba(201,122,58,0.45);
+}
+body.is-clicking #cur-dot {
+  width: 6px; height: 6px;
+  background: #fff;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 980px) {
+  .p-grid { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 44px; }
+  .about-aside { position: static; }
+  .t-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  nav { padding: 14px 18px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 0.6rem; letter-spacing: 0.12em; }
+  .hero-content { padding: 100px 20px 48px; }
+  .hero-site-title { font-size: clamp(2rem, 9vw, 3.2rem); }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-tagline { font-size: 0.56rem; letter-spacing: 0.07em; }
+  .spad { padding: 60px 20px; }
+  .projects-section { padding: 60px 20px; }
+  .closing { padding: 60px 20px; }
+  footer { flex-direction: column; align-items: flex-start; padding: 28px 20px; gap: 16px; }
+  .footer-links { flex-wrap: wrap; gap: 12px 20px; }
+  .o-grid { grid-template-columns: 1fr; }
+  .p-grid { grid-template-columns: 1fr; }
+  .t-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .about-photo-top { max-width: 280px; }
+  .about-aside { position: static; }
+  .pull-quote { font-size: 1.1rem; padding: 22px 20px; }
+  .o-card { padding: 34px 26px; }
+  .p-card { padding: 32px 26px; }
+  .t-card { padding: 30px 24px; }
+  .closing-quote { font-size: clamp(1.4rem, 5.5vw, 2rem); }
+  .connect-btn { padding: 14px 28px; }
+  .heading { font-size: clamp(1.7rem, 6vw, 2.6rem); }
+  .name-story { font-size: 1.05rem; }
+  .p-grid { gap: 14px; }
+  .o-grid { gap: 14px; }
+}
+@media (max-width: 480px) {
+  nav { padding: 12px 16px; }
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 0.55rem; }
+  .hero-content { padding: 90px 16px 40px; }
+  .spad { padding: 48px 16px; }
+  .projects-section { padding: 48px 16px; }
+  .closing { padding: 48px 16px; }
+  footer { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+<!-- CURSOR -->
+<canvas id="cur-spiral-canvas"></canvas>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<nav id="nav">
+  <a class="nav-name" href="#home">Keiko Roy-Carey</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#offerings">Offerings</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#reach-out">Connect</a></li>
+    <li><a href="#testimonials">Kind Words</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Creative &middot; Healer &middot; Guide &middot; Bridge Builder</p>
+      <h1 class="hero-site-title">welcome to my ecosystem 🌿</h1>
+      <p class="hero-subtitle">I help people sit with the tensions they don&rsquo;t know how to sit with, and find what&rsquo;s trying to emerge. This is where some of that work lives.</p>
+      <p class="hero-tagline">Life Transitions &nbsp;&middot;&nbsp; Inner Knowing &nbsp;&middot;&nbsp; Values &amp; Purpose &nbsp;&middot;&nbsp; Grief &amp; Loss &nbsp;&middot;&nbsp; Community &amp; Connection</p>
+      <a class="hero-cta" href="#about">Come in &rarr;</a>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C280,80 560,0 840,40 C1120,80 1280,10 1440,40 L1440,80 L0,80 Z" fill="#FDFAF7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about spad" id="about">
+  <div class="wrap">
+    <p class="kicker r">About</p>
+    <h2 class="heading r">A name is a <em>spell</em></h2>
+    <div class="about-grid">
+
+      <div>
+        <div class="about-photo-top r">
+          <img src="keiko.jpg" alt="Keiko Roy-Carey in South Korea">
+        </div>
+        <p class="name-story r">
+          My mother named me after Japanese pianist and composer Keiko Matsui. Depending on how you write it in kanji, Keiko can mean happy child, respectful child, scenic child, sunlight child, or open child. In a different context entirely, Keiko means practice, to contemplate the past and to reflect on old ways.
+        </p>
+        <p class="name-story r">
+          I now see that I carry all of those meanings, as my mother imprinted her deepest hope for me, and I intuit even herself, inside my name. A name is powerful because it is also a <span class="spell">spell</span>. She must have known that by naming me Keiko, I would manifest in every moment my name is spoken out loud.
+        </p>
+        <p class="name-story r">
+          This might be my first experience of what Thich Nhat Hanh calls <span class="interbeing">interbeing</span>: the understanding that we are all deeply connected. So when you say my name, you too are participating in realizing my mom&rsquo;s dream for me. And because we inter-are, it is a spell for you too: may you be happy, joyful, open, contemplative and reflective.
+        </p>
+
+        <button class="read-btn r" id="readBtn" onclick="toggleMore()">
+          <span id="readLabel">Read more about me</span>
+          <span class="arr">&#8595;</span>
+        </button>
+
+        <div class="expandable" id="expandable">
+          <p class="about-para">I&rsquo;m someone who deeply cares about people, about our peace, our sense of freedom, and our capacity to live in a way that actually feels authentic. I&rsquo;ve spent over a decade creating space for people, 1:1 and in community, to come back to freedom in their work, their relationships, their creative life, and their sense of who they are.</p>
+
+          <p class="about-para">I&rsquo;ve formally guided 40+ people through some of life&rsquo;s biggest crossroads: career changes, the end of relationships, grief, creative blocks, spiritual questioning, and the quiet unraveling that happens when you know where you are isn&rsquo;t it anymore, but you just don&rsquo;t yet know what&rsquo;s next. I never tell people what to do. I hold the space. I ask the questions that help you hear yourself more clearly.</p>
+
+          <p class="about-para">I experience deep grief, deep love, and the particular kind of disorientation that comes from starting over again and again. All of it is woven into how I show up.</p>
+
+          <p class="about-para">Community will always be central to my offerings. I&rsquo;m inviting people in and holding space where transformation can emerge, bridging inner wisdom and knowing to usher in the world we&rsquo;re reimagining: a better world for all of us, especially those who come after us.</p>
+        </div>
+      </div>
+
+      <div class="about-aside">
+        <div class="pull-quote r">
+          Have you ever felt like something inside you knows <em style="color:var(--tide); font-style:italic;">this</em> isn&rsquo;t quite right? That&rsquo;s usually where we begin.
+        </div>
+        <div class="roots r d1">
+          <p class="roots-label">Draws from</p>
+          <div class="roots-list">
+            <div>Lived experience &middot; Integration</div>
+            <div>Ancestral wisdom &middot; Somatic practice</div>
+            <div>Thich Nhat Hanh &middot; Interbeing</div>
+            <div>adrienne maree brown &middot; Emergent Strategy</div>
+            <div>bell hooks &middot; Love and Liberation</div>
+            <div>Mindfulness &middot; Contemplative Practice</div>
+            <div>Daoist flow &amp; balance</div>
+            <div>Plant medicine &middot; Non-duality</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="wave-sep">
+  <svg viewBox="0 0 1440 56" preserveAspectRatio="none">
+    <path d="M0,0 C360,56 1080,0 1440,56 L1440,56 L0,56 Z" fill="#F4F0E8"/>
+  </svg>
+</div>
+
+<!-- OFFERINGS -->
+<section class="offerings spad" id="offerings">
+  <div class="wrap">
+    <p class="kicker r">Offerings</p>
+    <h2 class="heading r">Sessions &amp; <em>Facilitation</em></h2>
+    <p class="offerings-intro r">These are offerings held with care, shaped around you.</p>
+    <div class="o-grid">
+
+      <div class="o-card r">
+        <p class="o-num">01</p>
+        <h3 class="o-title">Threshold Sessions</h3>
+        <p class="o-collab">&#10022;&ensp;In collaboration with <a href="https://www.instagram.com/jnaydaily/" target="_blank">Janea Brown</a> &middot; Earthlings Undone Founder</p>
+        <p class="o-body">
+          For anyone who knows something needs to shift, but hasn&rsquo;t yet had the right space to figure out what. Maybe it&rsquo;s your lifestyle, work, a relationship, a creative direction, or just a quiet feeling that you&rsquo;ve outgrown something and you&rsquo;re not sure what&rsquo;s next.<br><br>
+          Janea and I have been in that place more times than we can count. I personally have moved countries, started over, lost people I loved, and rebuilt. We don&rsquo;t offer you a roadmap. We help you unearth your own.<br><br>
+          Each session begins with a short reflection before we meet. Then we go deep, at whatever pace feels right for you.
+        </p>
+        <p class="o-price">Sliding scale &middot; 45 minute or 2 hour sessions</p>
+        <a class="o-cta" href="https://tally.so/r/PdEEvQ" target="_blank">Learn more &rarr;</a>
+      </div>
+
+      <div class="o-card r d1">
+        <p class="o-num">02</p>
+        <h3 class="o-title">Community Conversations About Death</h3>
+        <p class="o-collab">&#10022;&ensp;In collaboration with <a href="https://www.facebook.com/invisiblecurrent/" target="_blank">Corey Westbury</a> &middot; End-of-Life Doula &amp; MAID Guide</p>
+        <p class="o-body">
+          A held, unhurried space for the questions most of us carry but rarely get to say out loud: about death, what matters most while we&rsquo;re alive, what we&rsquo;re leaving behind, and how we want to meet the end of a life or a chapter.<br><br>
+          End-of-life conversations, and facilitated gatherings. This work is sacred, and we hold it together with care.
+        </p>
+        <p class="o-price">Virtual mostly &middot; More details coming soon</p>
+        <span class="badge">Coming Soon</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="wave-sep" style="background:#F4F0E8;">
+  <svg viewBox="0 0 1440 56" preserveAspectRatio="none">
+    <path d="M0,56 C480,0 960,56 1440,0 L1440,56 L0,56 Z" fill="#1C3542"/>
+  </svg>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="wrap">
+    <p class="kicker r" style="color:var(--seafoam);">Living Projects</p>
+    <h2 class="heading r" style="color:#fff; margin-bottom:8px;">Where I&rsquo;m <em style="color:var(--seafoam);">building</em></h2>
+    <p class="projects-intro r">Beyond 1:1 sessions, these are the shared containers where I co-create and reimagine within community.</p>
+    <div class="p-grid">
+
+      <div class="p-card r">
+        <span class="p-icon">&#10024;</span>
+        <h3 class="p-name">Inyeon</h3>
+        <p class="p-role">Co-Founder &middot; Since 2022</p>
+        <p class="p-body">Much of my work is about creating the conditions for people to see themselves clearly, without shame, without performance, without being rushed toward an answer. Inyeon is a journaling platform inspired by inyeon (인연), the Korean concept of invisible threads between people whose paths were always meant to cross. Voice-first. Compassionately rooted.<br><br>Inyeon reflects your awareness back without adding meaning, surfaces compassionate patterns in your reflections, and gets quieter as you develop more compassion.<br><br>We&rsquo;re three years in, co-creating intentionally with a team of five. Sitting with hard questions about AI, self-reflection, post-capitalist economies, and what a tool can and cannot honestly hold. We don&rsquo;t have clean answers yet. We&rsquo;re open-sourcing what we learn.<br><br><em style="color:rgba(168,201,208,0.6);font-size:0.85rem;">Co-founded with Tobi Olofintuyi.</em></p>
+        <a href="https://www.inyeon.ai" target="_blank" class="p-link">Visit Inyeon &rarr;</a>
+      </div>
+
+      <div class="p-card r d1">
+        <span class="p-icon">&#127757;</span>
+        <h3 class="p-name">Earthlings Undone</h3>
+        <p class="p-role">Co-Steward &middot; Internal Care &middot; Since 2025</p>
+        <p class="p-body">Building the connective infrastructure that makes real-world alternatives discoverable &mdash; cooperatives, mutual aid networks, healing collectives, land projects &mdash; bridging grassroots organizations already building alternatives with the people who need them most. Creating pathways toward freer ways of living.<br><br>I help steward the internal culture and support strategy and community development. I bring integration wisdom gathered over years of doing this kind of work.</p>
+        <a href="https://earthlingsundone.notion.site/" target="_blank" class="p-link">Visit Earthlings Undone &rarr;</a>
+      </div>
+
+      <div class="p-card r d2">
+        <span class="p-icon">&#127911;</span>
+        <h3 class="p-name">A Colorful Life Podcast</h3>
+        <p class="p-role">Podcast Host &middot; Creator &middot; Since 2022</p>
+        <p class="p-body">&ldquo;8 billion humans equals 8 billion ways to live a life.&rdquo; I created this podcast because I believe every person&rsquo;s story contains wisdom &mdash; and that hearing how other people have navigated their one wild and precious life makes you braver about yours.</p>
+        <div class="spotify-embed r" style="margin-top:22px;">
+          <p style="font-size:0.65rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--seafoam);opacity:0.75;margin-bottom:12px;">Keiko shares some of her journey in this video episode</p>
+          <iframe style="border-radius:12px; width:100%; max-width:100%;" src="https://open.spotify.com/embed/episode/3gsryvWal76KijTi9nlXYC?utm_source=generator&theme=0" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+        <a href="https://tr.ee/YKt_-RPb5i" target="_blank" class="p-link" style="margin-top:16px;">All episodes &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="wave-sep" style="background:#1C3542;">
+  <svg viewBox="0 0 1440 56" preserveAspectRatio="none">
+    <path d="M0,0 C480,56 960,0 1440,56 L1440,56 L0,56 Z" fill="#F4F0E8"/>
+  </svg>
+</div>
+
+<!-- CONNECT -->
+<section class="closing" id="connect">
+  <p class="closing-kicker r">An Invitation</p>
+  <p class="closing-quote r">&ldquo;Tell me, what is it you plan to do with your one wild and precious life?&rdquo;</p>
+  <p class="closing-attr r">&mdash; Mary Oliver</p>
+  <p class="closing-body r">If something here resonates, if you&rsquo;re at a crossroads, building something that matters, or simply feel connected to any offering &mdash; I&rsquo;d love to hear from you.</p>
+  <div class="connect-actions r" id="reach-out">
+    <a href="https://tally.so/r/PdEEvQ" target="_blank" class="connect-btn">Reach out &#10022;</a>
+    <p class="connect-or">or</p>
+    <p class="connect-email">email Keiko at <a href="/cdn-cgi/l/email-protection#0c67696567637e63756f6d7e69754c7c7e63786362226169">keikoroycarey&#64;proton.me</a></p>
+  </div>
+</section>
+
+<!-- wave: linen → white -->
+<div class="wave-sep" style="background:var(--linen);">
+  <svg viewBox="0 0 1440 56" preserveAspectRatio="none">
+    <path d="M0,56 C360,0 1080,56 1440,0 L1440,56 L0,56 Z" fill="#FDFAF7"/>
+  </svg>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials spad" id="testimonials">
+  <div class="wrap">
+    <p class="kicker r">Kind Words</p>
+    <h2 class="heading r">What people <em>say</em></h2>
+    <p class="testimonials-intro r">Words from people I&rsquo;ve had the honour of working with.</p>
+    <div class="t-scroll-wrap r">
+      <div class="t-track" id="tTrack">
+
+        <div class="t-card">
+          <p class="t-body">I came to Keiko feeling lost and uninspired. Through our sessions, I reconnected to my curiosity and gained confidence in my creativity. Keiko not only does her research, using a variety of tools and exercises to help you understand yourself more deeply, but she&rsquo;s also such a genuine person and creates a space where it feels comfortable to be honest and vulnerable. It&rsquo;s been six months since our last session, and I still return to the notes and resources she shared. Without a doubt, she was a huge catalyst in helping me shed beliefs and ideas that were holding me back. I am writing more, pursuing new creative endeavors, and feel more aligned!</p>
+          <p class="t-name">Alicia</p>
+        </div>
+
+        <div class="t-card">
+          <p class="t-body">Working with her throughout the years has truly been transformative. Keiko has an amazing ability to help people see their own potential. Through her mentorship, she has helped me find my confidence and self-worth. One of the most powerful ways that Keiko has supported me was helping me develop deeper empathy for myself. She encouraged me to recognize my strengths and value my experiences. Beyond that, Keiko is a true kindred spirit bringing both her emotional intelligence and professional insights in everything she does. Her ability to blend compassion with practical guidance has inspired me to become a stronger professional, and as a person. I carry the lessons she has taught me as I continue my journey.</p>
+          <p class="t-name">Angellica</p>
+        </div>
+
+        <div class="t-card">
+          <p class="t-body">Keiko has a unique way of making you feel super comfortable, asking thoughtful questions, and genuinely makes you feel like she is trying to meet you where you are at. I think she is a very inspiring person. I admire her values and the impact she is making on the world through her coaching and podcast by inspiring others to live more authentically and true to themselves. What I appreciated about her coaching style was that she is a really great listener. She always made me feel like she really wanted to get to the heart of what I was struggling with and find a way forward together with me no matter what stage I was at.</p>
+          <p class="t-name">Sophia</p>
+        </div>
+
+        <div class="t-card">
+          <p class="t-body">Keiko taught me not to just be intelligent, but to be unique and intentional in all of my actions and interactions. She is extremely perceptive and helped me identify my distinct combination of strengths and ways to confidently present them. It doesn&rsquo;t matter where you are &mdash; if you are willing to put in the work, Keiko will help you shine!</p>
+          <p class="t-name">James</p>
+        </div>
+
+        <div class="t-card">
+          <p class="t-body">Connector. Thought Partner. Coach. Collaborator. Strategic Thinker. Keiko takes the time to really understand what you need and how best you can move forward with what you hope to accomplish.</p>
+          <p class="t-name">Sumera</p>
+        </div>
+
+      </div>
+      <div class="t-nav">
+        <button class="t-arrow" id="tPrev" aria-label="Previous">&#8592;</button>
+        <div class="t-dots" id="tDots"></div>
+        <button class="t-arrow" id="tNext" aria-label="Next">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-name">Keiko Roy-Carey</div>
+    <div class="footer-sub">Builder of bridges from inner wisdom to collective liberation</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#offerings">Offerings</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#reach-out">Connect</a></li>
+  </ul>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── NAV SCROLL STATE ── */
+var nav = document.getElementById('nav');
+function updateNav() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+/* ── SMOOTH NAV LINKS (fix for in-page anchors) ── */
+document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    var targetId = this.getAttribute('href').slice(1);
+    var target = document.getElementById(targetId);
+    if (!target) return;
+    e.preventDefault();
+    var offset = 72;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  });
+});
+
+/* ── HERO CANVAS ── */
+(function(){
+  var canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, particles = [], spiralAngle = 0;
+  function resize(){
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  for (var i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * 1200, y: Math.random() * 800,
+      r: Math.random() * 2.2 + 0.5,
+      a: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.004 + 0.001,
+      drift: (Math.random() - 0.5) * 0.2,
+      opacity: Math.random() * 0.25 + 0.05
+    });
+  }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    spiralAngle += 0.0035;
+    ctx.save();
+    ctx.translate(W * 0.78, H * 0.5);
+    ctx.rotate(spiralAngle);
+    var grd = ctx.createRadialGradient(0,0,0,0,0,200);
+    grd.addColorStop(0,   'rgba(168,201,208,0.16)');
+    grd.addColorStop(0.6, 'rgba(74,127,150,0.05)');
+    grd.addColorStop(1,   'transparent');
+    ctx.fillStyle = grd;
+    ctx.beginPath(); ctx.arc(0,0,200,0,Math.PI*2); ctx.fill();
+    for (var arm = 0; arm < 2; arm++) {
+      ctx.save();
+      ctx.rotate((arm / 2) * Math.PI * 2);
+      ctx.beginPath();
+      for (var s = 0; s <= 500; s++) {
+        var ang = (s / 500) * Math.PI * 5;
+        var rad = (s / 500) * 185;
+        if (s === 0) ctx.moveTo(Math.cos(ang)*rad, Math.sin(ang)*rad);
+        else ctx.lineTo(Math.cos(ang)*rad, Math.sin(ang)*rad);
+      }
+      ctx.strokeStyle = 'rgba(168,201,208,0.14)';
+      ctx.lineWidth = 1.3;
+      ctx.stroke();
+      ctx.restore();
+    }
+    ctx.restore();
+    particles.forEach(function(p){
+      p.a += p.speed;
+      p.x += Math.cos(p.a) * p.drift;
+      p.y += Math.sin(p.a) * 0.1;
+      if (p.y < -10) p.y = H + 10;
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W+10) p.x = -10;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(168,201,208,' + p.opacity + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}());
+
+/* ── READ MORE ── */
+function toggleMore() {
+  var btn  = document.getElementById('readBtn');
+  var box  = document.getElementById('expandable');
+  var lbl  = document.getElementById('readLabel');
+  var open = box.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  lbl.textContent = open ? 'Read less' : 'Read more about me';
+}
+
+/* ── SCROLL REVEAL ── */
+var revealObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if (e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.r').forEach(function(el){ revealObserver.observe(el); });
+
+/* ── SPIRAL CURSOR (desktop only) ── */
+(function(){
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isTouch) {
+    /* hide cursor elements on touch devices */
+    var d = document.getElementById('cur-dot');
+    var r = document.getElementById('cur-ring');
+    var c = document.getElementById('cur-spiral-canvas');
+    if (d) d.style.display = 'none';
+    if (r) r.style.display = 'none';
+    if (c) c.style.display = 'none';
+    /* restore default cursor */
+    document.body.style.cursor = '';
+    var s = document.createElement('style');
+    s.textContent = '*, *::before, *::after { cursor: auto !important; } a, button { cursor: pointer !important; }';
+    document.head.appendChild(s);
+    return;
+  }
+  var dot   = document.getElementById('cur-dot');
+  var ring  = document.getElementById('cur-ring');
+  var cv    = document.getElementById('cur-spiral-canvas');
+  if (!dot || !ring || !cv) return;
+  var ctx   = cv.getContext('2d');
+  var mx = window.innerWidth/2, my = window.innerHeight/2;
+  var rx = mx, ry = my;
+  var ripples = [];
+  var spiralRot = 0;
+  var isHover = false, isClick = false;
+
+  cv.width  = window.innerWidth;
+  cv.height = window.innerHeight;
+  window.addEventListener('resize', function(){
+    cv.width  = window.innerWidth;
+    cv.height = window.innerHeight;
+  });
+
+  /* track mouse */
+  document.addEventListener('mousemove', function(e){
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  /* hover detection on interactive elements */
+  document.querySelectorAll('a, button, .o-card, .p-card, .read-btn').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ isHover = true; document.body.classList.add('is-hovering'); });
+    el.addEventListener('mouseleave', function(){ isHover = false; document.body.classList.remove('is-hovering'); });
+  });
+
+  /* click ripple + highlight */
+  document.addEventListener('mousedown', function(e){
+    isClick = true;
+    document.body.classList.add('is-clicking');
+    for (var i = 0; i < 8; i++) {
+      ripples.push({
+        x: mx, y: my,
+        angle: (i / 8) * Math.PI * 2,
+        radius: 0,
+        maxRadius: 45 + Math.random() * 30,
+        opacity: 0.7,
+        speed: 1.8 + Math.random() * 1.2,
+        rot: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.14
+      });
+    }
+    var el = e.target.closest('a, button, .o-card, .p-card');
+    if (el) {
+      el.style.transition = 'box-shadow 0.05s, outline 0.05s';
+      el.style.outline = '2px solid rgba(168,201,208,0.6)';
+      el.style.outlineOffset = '3px';
+      setTimeout(function(){ el.style.outline = ''; el.style.outlineOffset = ''; }, 380);
+    }
+  });
+  document.addEventListener('mouseup', function(){
+    isClick = false;
+    document.body.classList.remove('is-clicking');
+  });
+
+  function loop(){
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+
+    spiralRot += 0.025;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+
+    ctx.save();
+    ctx.translate(mx, my);
+    ctx.rotate(spiralRot);
+    ctx.beginPath();
+    var sr = isHover ? 18 : 12;
+    for (var s = 0; s <= 180; s++) {
+      var a = (s / 180) * Math.PI * 3.5;
+      var r = (s / 180) * sr;
+      var px = Math.cos(a) * r, py = Math.sin(a) * r;
+      if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = isHover
+      ? 'rgba(201,122,58,' + (isClick ? '0.9' : '0.55') + ')'
+      : 'rgba(168,201,208,' + (isClick ? '0.9' : '0.45') + ')';
+    ctx.lineWidth = isHover ? 1.6 : 1.2;
+    ctx.stroke();
+    ctx.restore();
+
+    ripples = ripples.filter(function(rp){ return rp.opacity > 0.01; });
+    ripples.forEach(function(rp){
+      rp.radius  += rp.speed;
+      rp.opacity -= 0.025;
+      rp.rot     += rp.rotSpeed;
+      if (rp.radius > rp.maxRadius) rp.opacity -= 0.06;
+      ctx.save();
+      ctx.translate(rp.x, rp.y);
+      ctx.rotate(rp.rot);
+      ctx.beginPath();
+      for (var s = 0; s <= 60; s++) {
+        var a = (s / 60) * Math.PI * 2.5;
+        var r = (s / 60) * rp.radius * 0.55;
+        var px = Math.cos(a + rp.angle) * r;
+        var py = Math.sin(a + rp.angle) * r;
+        if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = 'rgba(168,201,208,' + rp.opacity + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    requestAnimationFrame(loop);
+  }
+  loop();
+}());
+
+/* ── TESTIMONIAL CAROUSEL ── */
+(function(){
+  var track  = document.getElementById('tTrack');
+  var prev   = document.getElementById('tPrev');
+  var next   = document.getElementById('tNext');
+  var dotsEl = document.getElementById('tDots');
+  if (!track) return;
+
+  var cards = track.querySelectorAll('.t-card');
+  var total = cards.length;
+  var current = 0;
+
+  /* build dots */
+  var dots = [];
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 't-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to ' + (i+1));
+    (function(idx){ d.addEventListener('click', function(){ goTo(idx); }); })(i);
+    dotsEl.appendChild(d);
+    dots.push(d);
+  }
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, total - 1));
+    var cardW = cards[0].offsetWidth + 20; /* card + gap */
+    track.scrollTo({ left: current * cardW, behavior: 'smooth' });
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+    prev.disabled = current === 0;
+    next.disabled = current === total - 1;
+  }
+
+  prev.addEventListener('click', function(){ goTo(current - 1); });
+  next.addEventListener('click', function(){ goTo(current + 1); });
+
+  /* sync dots on native scroll / touch swipe */
+  track.addEventListener('scroll', function(){
+    var cardW = cards[0].offsetWidth + 20;
+    var idx = Math.round(track.scrollLeft / cardW);
+    if (idx !== current) {
+      current = idx;
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+      prev.disabled = current === 0;
+      next.disabled = current === total - 1;
+    }
+  }, { passive: true });
+
+  /* drag to scroll on desktop */
+  var isDragging = false, startX, startScroll;
+  track.addEventListener('mousedown', function(e){
+    isDragging = true; startX = e.pageX; startScroll = track.scrollLeft;
+    track.style.userSelect = 'none';
+  });
+  document.addEventListener('mousemove', function(e){
+    if (!isDragging) return;
+    track.scrollLeft = startScroll - (e.pageX - startX);
+  });
+  document.addEventListener('mouseup', function(){
+    if (!isDragging) return;
+    isDragging = false; track.style.userSelect = '';
+    var cardW = cards[0].offsetWidth + 20;
+    goTo(Math.round(track.scrollLeft / cardW));
+  });
+
+  goTo(0);
+}());
+</script>
+</body>
+</html>
