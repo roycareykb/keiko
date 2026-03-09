@@ -502,6 +502,52 @@ footer {
 .r.d2 { transition-delay: 0.22s; }
 .r.d3 { transition-delay: 0.38s; }
 
+/* ── VALUES inline in About ── */
+.values-inline { margin-top: 32px; }
+.values-inline-label {
+  font-family: 'Jost', sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--tide); margin-bottom: 14px;
+}
+.values-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.value-pill {
+  background: var(--linen); border: 1px solid rgba(74,127,150,0.2);
+  border-radius: 30px; padding: 6px 14px; cursor: pointer;
+  transition: all 0.22s ease; font-family: 'Jost', sans-serif;
+  font-size: 0.75rem; color: var(--ocean); letter-spacing: 0.01em;
+}
+.value-pill:hover { background: var(--ocean); color: white; border-color: var(--ocean); }
+.value-pill.open {
+  background: var(--deep); color: white; border-color: var(--deep);
+  border-radius: 10px; padding: 10px 14px; flex: 1 1 100%;
+}
+.value-pill-label { font-weight: 500; font-size: 0.78rem; }
+.value-pill-desc {
+  display: none; font-size: 0.78rem; margin-top: 6px;
+  line-height: 1.6; color: rgba(255,255,255,0.82); font-weight: 300;
+}
+.value-pill.open .value-pill-desc { display: block; }
+
+/* ── FIXATIONS compact ── */
+.fixations-section { background: var(--deep); padding: 72px 52px; }
+.fixations-section .kicker { color: var(--tide); }
+.fixations-section .heading { color: var(--linen); }
+.fixations-scroll {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  max-width: 780px; margin-top: 32px;
+}
+.fix-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 30px; padding: 7px 14px;
+  font-family: 'Jost', sans-serif; font-size: 0.78rem;
+  color: var(--seafoam); text-decoration: none;
+  transition: all 0.2s ease; white-space: nowrap;
+}
+a.fix-tag:hover { background: rgba(74,127,150,0.25); border-color: var(--tide); color: white; }
+.fix-tag .fix-icon { font-size: 0.85rem; }
+
 /* ── TESTIMONIALS ── */
 .testimonials { background: var(--white); }
 .testimonials-intro {
@@ -648,6 +694,9 @@ body.is-clicking #cur-dot {
   .name-story { font-size: 1.05rem; }
   .p-grid { gap: 14px; }
   .o-grid { gap: 14px; }
+  .fixations-section { padding: 60px 20px; }
+  .fixations-scroll { gap: 7px; }
+  .fix-tag { font-size: 0.73rem; padding: 6px 12px; }
 }
 @media (max-width: 480px) {
   nav { padding: 12px 16px; }
@@ -673,7 +722,7 @@ body.is-clicking #cur-dot {
     <li><a href="#about">About</a></li>
     <li><a href="#offerings">Offerings</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#reach-out">Connect</a></li>
+    <li><a href="#connect">Connect</a></li>
     <li><a href="#testimonials">Kind Words</a></li>
   </ul>
 </nav>
@@ -731,6 +780,44 @@ body.is-clicking #cur-dot {
           <p class="about-para">I experience deep grief, deep love, and the particular kind of disorientation that comes from starting over again and again. All of it is woven into how I show up.</p>
 
           <p class="about-para">Community will always be central to my offerings. I&rsquo;m inviting people in and holding space where transformation can emerge, bridging inner wisdom and knowing to usher in the world we&rsquo;re reimagining: a better world for all of us, especially those who come after us.</p>
+
+          <div class="values-inline">
+            <p class="values-inline-label">integrating through practice</p>
+            <div class="values-grid">
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Regeneration over Extraction</div>
+                <div class="value-pill-desc">Building with people, not off of them. Honoring the wholeness of what each person brings to every collaboration.</div>
+              </div>
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Integration over Information</div>
+                <div class="value-pill-desc">Embodying knowledge, not just collecting it. Letting what's learned move through the body and actually change something.</div>
+              </div>
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Invitation over Centering</div>
+                <div class="value-pill-desc">Creating space, and not dominating it. Inviting people into their own wisdom instead.</div>
+              </div>
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Interbeing over Dogma</div>
+                <div class="value-pill-desc">Everything is interconnected. Refusing to collapse complex tensions into easy answers.</div>
+              </div>
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Embodiment over Theory</div>
+                <div class="value-pill-desc">Ground ideas in lived experience, sensation, and story. I am a dancer. Knowledge that doesn't move through the body doesn't move me.</div>
+              </div>
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Flow over Force</div>
+                <div class="value-pill-desc">Trusting what wants to emerge. Honoring the capacity of everyone involved rather than pushing past what's ready.</div>
+              </div>
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Accessibility over Elitism</div>
+                <div class="value-pill-desc">Making complexity accessible without watering it down. Deep healing work shouldn't require specific vocabulary or credentials to enter.</div>
+              </div>
+              <div class="value-pill" onclick="togglePill(this)">
+                <div class="value-pill-label">Open Source over Proprietary</div>
+                <div class="value-pill-desc">Sharing what's learned freely. Hoarding wisdom doesn't serve the collective, passing it forward does.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -778,7 +865,7 @@ body.is-clicking #cur-dot {
         <p class="o-body">
           For anyone who knows something needs to shift, but hasn&rsquo;t yet had the right space to figure out what. Maybe it&rsquo;s your lifestyle, work, a relationship, a creative direction, or just a quiet feeling that you&rsquo;ve outgrown something and you&rsquo;re not sure what&rsquo;s next.<br><br>
           Janea and I have been in that place more times than we can count. I personally have moved countries, started over, lost people I loved, and rebuilt. We don&rsquo;t offer you a roadmap. We help you unearth your own.<br><br>
-          Each session begins with a comprehensive guided self-reflection before we even meet. Then we go deep, at whatever pace feels right for you.
+          Each session begins with a short reflection before we meet. Then we go deep, at whatever pace feels right for you.
         </p>
         <p class="o-price">Sliding scale &middot; 45 minute or 2 hour sessions</p>
         <a class="o-cta" href="https://tally.so/r/PdEEvQ" target="_blank">Learn more &rarr;</a>
@@ -811,7 +898,7 @@ body.is-clicking #cur-dot {
   <div class="wrap">
     <p class="kicker r" style="color:var(--seafoam);">Living Projects</p>
     <h2 class="heading r" style="color:#fff; margin-bottom:8px;">Where I&rsquo;m <em style="color:var(--seafoam);">building</em></h2>
-    <p class="projects-intro r">Beyond guided sessions, these are the shared containers where I co-create and reimagine within community.</p>
+    <p class="projects-intro r">Beyond 1:1 sessions, these are the shared containers where I co-create and reimagine within community.</p>
     <div class="p-grid">
 
       <div class="p-card r">
@@ -853,7 +940,7 @@ body.is-clicking #cur-dot {
 </div>
 
 <!-- CONNECT -->
-<section class="closing" id="connect">
+<section class="closing" id="connect" style="scroll-margin-top: 80px;">
   <p class="closing-kicker r">An Invitation</p>
   <p class="closing-quote r">&ldquo;Tell me, what is it you plan to do with your one wild and precious life?&rdquo;</p>
   <p class="closing-attr r">&mdash; Mary Oliver</p>
@@ -861,7 +948,7 @@ body.is-clicking #cur-dot {
   <div class="connect-actions r" id="reach-out">
     <a href="https://tally.so/r/PdEEvQ" target="_blank" class="connect-btn">Reach out &#10022;</a>
     <p class="connect-or">or</p>
-    <p class="connect-email">email Keiko at <a href="mailto:keikoroycarey@proton.me">keikoroycarey@proton.me</a></p>
+    <p class="connect-email">email Keiko at <a href="/cdn-cgi/l/email-protection#c3a8a6aaa8acb1acbaa0a2b1a6ba83b3b1acb7acadedaea6"><span class="__cf_email__" data-cfemail="7d16181416120f12041e1c0f18043d0d0f12091213531018">[email&#160;protected]</span></a></p>
   </div>
 </section>
 
@@ -916,6 +1003,30 @@ body.is-clicking #cur-dot {
   </div>
 </section>
 
+<!-- FIXATIONS -->
+<section class="fixations-section spad" id="fixations">
+  <div class="wrap">
+    <p class="kicker r" style="color:var(--tide);">what's composting 🌱</p>
+    <h2 class="heading r" style="color:var(--linen);">Musings I find myself <em>returning to</em></h2>
+    <div class="fixations-scroll r">
+      <a class="fix-tag" href="https://adriennemareebrown.net/book/emergent-strategy/" target="_blank" rel="noopener"><span class="fix-icon">📖</span>Emergent Strategy</a>
+      <span class="fix-tag"><span class="fix-icon">🇰🇷</span>Learning Korean</span>
+      <a class="fix-tag" href="https://scienceandnonduality.com/audio/97-love-the-metacrisis/" target="_blank" rel="noopener"><span class="fix-icon">🎙️</span>Love and the Metacrisis</a>
+      <a class="fix-tag" href="https://scienceandnonduality.com/audio/sound-of-sand-ep-14-healing-relationships-in-community-and-in-ourselves/" target="_blank" rel="noopener"><span class="fix-icon">🎙️</span>Healing Relationships in Community</a>
+      <a class="fix-tag" href="https://youtu.be/XbPHojL_61U?si=rFeJ2sAafaO3QPru" target="_blank" rel="noopener"><span class="fix-icon">🌿</span>Neri Oxman &amp; Biomimicry</a>
+      <a class="fix-tag" href="https://www.youtube.com/watch?v=jCcoi3Tzv_Y" target="_blank" rel="noopener"><span class="fix-icon">🎵</span>Rosalía on her process</a>
+      <a class="fix-tag" href="https://www.ecoliteracy.org/article/great-turning" target="_blank" rel="noopener"><span class="fix-icon">🕯️</span>The Great Turning</a>
+      <a class="fix-tag" href="https://youtube.com/shorts/4TgARt23svk?si=HR1t72R1uQgOwexi" target="_blank" rel="noopener"><span class="fix-icon">✍️</span>Andrea Gibson</a>
+      <a class="fix-tag" href="https://youtu.be/M6k5l0-_bLg?si=dScaN76oIOQ3nPJU" target="_blank" rel="noopener"><span class="fix-icon">🎧</span>Vinyasa by Jonah Kest</a>
+      <a class="fix-tag" href="https://youtu.be/QuHydabht-w?si=B31lsld-aWSlbYFV" target="_blank" rel="noopener"><span class="fix-icon">🎬</span>Viola Davis on Worthiness</a>
+      <span class="fix-tag"><span class="fix-icon">🔮</span>Vedic Astrology + Human Design</span>
+      <span class="fix-tag"><span class="fix-icon">🌍</span>Indigenous Wisdom</span>
+      <span class="fix-tag"><span class="fix-icon">🪴</span>We will all be ancestors.</span>
+      <a class="fix-tag" href="https://www.parallax.org/product/the-sun-my-heart/" target="_blank" rel="noopener"><span class="fix-icon">📖</span>The Sun My Heart — Thich Nhat Hanh</a>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div>
@@ -926,11 +1037,11 @@ body.is-clicking #cur-dot {
     <li><a href="#about">About</a></li>
     <li><a href="#offerings">Offerings</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#reach-out">Connect</a></li>
+    <li><a href="https://tally.so/r/PdEEvQ" target="_blank">Connect</a></li>
   </ul>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── NAV SCROLL STATE ── */
 var nav = document.getElementById('nav');
 function updateNav() {
@@ -1030,6 +1141,12 @@ function toggleMore() {
 }
 
 /* ── SCROLL REVEAL ── */
+function togglePill(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.value-pill.open').forEach(p => p.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
 var revealObserver = new IntersectionObserver(function(entries){
   entries.forEach(function(e){
     if (e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target); }
@@ -1227,15 +1344,11 @@ document.querySelectorAll('.r').forEach(function(el){ revealObserver.observe(el)
     if (!isDragging) return;
     track.scrollLeft = startScroll - (e.pageX - startX);
   });
-  document.addEventListener('mouseup', function(){
-    if (!isDragging) return;
-    isDragging = false; track.style.userSelect = '';
-    var cardW = cards[0].offsetWidth + 20;
-    goTo(Math.round(track.scrollLeft / cardW));
+  document.addEventListener('mouseup', function(){ 
+    isDragging = false; 
+    track.style.userSelect = ''; 
   });
-
-  goTo(0);
-}());
+})();
 </script>
 </body>
 </html>
