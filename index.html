@@ -511,22 +511,39 @@ footer {
 }
 .values-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 .value-pill {
-  background: var(--linen); border: 1px solid rgba(74,127,150,0.2);
-  border-radius: 30px; padding: 6px 14px; cursor: pointer;
+  background: var(--linen); border: 1px solid rgba(74,127,150,0.3);
+  border-radius: 30px; padding: 6px 14px 6px 14px; cursor: pointer;
   transition: all 0.22s ease; font-family: 'Jost', sans-serif;
   font-size: 0.75rem; color: var(--ocean); letter-spacing: 0.01em;
+  display: flex; align-items: center; gap: 6px;
+  user-select: none;
+}
+.value-pill::after {
+  content: '+';
+  font-size: 0.9rem; font-weight: 300;
+  color: var(--tide); margin-left: 2px;
+  transition: transform 0.2s ease;
 }
 .value-pill:hover { background: var(--ocean); color: white; border-color: var(--ocean); }
+.value-pill:hover::after { color: rgba(255,255,255,0.7); }
 .value-pill.open {
   background: var(--deep); color: white; border-color: var(--deep);
   border-radius: 10px; padding: 10px 14px; flex: 1 1 100%;
+  align-items: flex-start; flex-direction: column;
 }
+.value-pill.open::after { content: '−'; color: rgba(255,255,255,0.5); align-self: flex-end; margin-top: -18px; }
 .value-pill-label { font-weight: 500; font-size: 0.78rem; }
 .value-pill-desc {
   display: none; font-size: 0.78rem; margin-top: 6px;
   line-height: 1.6; color: rgba(255,255,255,0.82); font-weight: 300;
 }
 .value-pill.open .value-pill-desc { display: block; }
+.values-hint {
+  font-family: 'Jost', sans-serif; font-size: 0.7rem;
+  color: var(--dust); margin-bottom: 10px; letter-spacing: 0.04em;
+  display: flex; align-items: center; gap: 5px;
+}
+.values-hint::before { content: '↓'; font-size: 0.65rem; }
 
 /* ── FIXATIONS compact ── */
 .fixations-section { background: var(--deep); padding: 72px 52px; }
@@ -536,16 +553,38 @@ footer {
   display: flex; flex-wrap: wrap; gap: 8px;
   max-width: 780px; margin-top: 32px;
 }
+.fixations-hint {
+  font-family: 'Jost', sans-serif; font-size: 0.7rem;
+  color: var(--mist); margin-bottom: 16px; letter-spacing: 0.04em;
+  opacity: 0.7;
+}
 .fix-tag {
   display: inline-flex; align-items: center; gap: 6px;
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 30px; padding: 7px 14px;
   font-family: 'Jost', sans-serif; font-size: 0.78rem;
   color: var(--seafoam); text-decoration: none;
   transition: all 0.2s ease; white-space: nowrap;
+  cursor: default;
 }
-a.fix-tag:hover { background: rgba(74,127,150,0.25); border-color: var(--tide); color: white; }
+a.fix-tag {
+  cursor: pointer;
+  border-color: rgba(74,127,150,0.35);
+  color: white;
+}
+a.fix-tag::after {
+  content: '↗';
+  font-size: 0.65rem;
+  opacity: 0.6;
+  margin-left: 2px;
+}
+a.fix-tag:hover {
+  background: rgba(74,127,150,0.3);
+  border-color: var(--tide);
+  color: white;
+  transform: translateY(-2px);
+}
 .fix-tag .fix-icon { font-size: 0.85rem; }
 
 /* ── TESTIMONIALS ── */
@@ -783,6 +822,7 @@ body.is-clicking #cur-dot {
 
           <div class="values-inline">
             <p class="values-inline-label">integrating through practice</p>
+            <p class="values-hint">tap any to expand</p>
             <div class="values-grid">
               <div class="value-pill" onclick="togglePill(this)">
                 <div class="value-pill-label">Regeneration over Extraction</div>
@@ -948,7 +988,7 @@ body.is-clicking #cur-dot {
   <div class="connect-actions r" id="reach-out">
     <a href="https://tally.so/r/PdEEvQ" target="_blank" class="connect-btn">Reach out &#10022;</a>
     <p class="connect-or">or</p>
-    <p class="connect-email">email Keiko at <a href="/cdn-cgi/l/email-protection#c3a8a6aaa8acb1acbaa0a2b1a6ba83b3b1acb7acadedaea6"><span class="__cf_email__" data-cfemail="7d16181416120f12041e1c0f18043d0d0f12091213531018">[email&#160;protected]</span></a></p>
+    <p class="connect-email">email keikoroycarey&#64;proton&#46;me</p>
   </div>
 </section>
 
@@ -1008,17 +1048,18 @@ body.is-clicking #cur-dot {
   <div class="wrap">
     <p class="kicker r" style="color:var(--tide);">what's composting 🌱</p>
     <h2 class="heading r" style="color:var(--linen);">Musings I find myself <em>returning to</em></h2>
+    <p class="fixations-hint r">↗ highlighted ones are links — tap to explore</p>
     <div class="fixations-scroll r">
       <a class="fix-tag" href="https://adriennemareebrown.net/book/emergent-strategy/" target="_blank" rel="noopener"><span class="fix-icon">📖</span>Emergent Strategy</a>
       <span class="fix-tag"><span class="fix-icon">🇰🇷</span>Learning Korean</span>
       <a class="fix-tag" href="https://scienceandnonduality.com/audio/97-love-the-metacrisis/" target="_blank" rel="noopener"><span class="fix-icon">🎙️</span>Love and the Metacrisis</a>
       <a class="fix-tag" href="https://scienceandnonduality.com/audio/sound-of-sand-ep-14-healing-relationships-in-community-and-in-ourselves/" target="_blank" rel="noopener"><span class="fix-icon">🎙️</span>Healing Relationships in Community</a>
       <a class="fix-tag" href="https://youtu.be/XbPHojL_61U?si=rFeJ2sAafaO3QPru" target="_blank" rel="noopener"><span class="fix-icon">🌿</span>Neri Oxman &amp; Biomimicry</a>
-      <a class="fix-tag" href="https://www.youtube.com/watch?v=jCcoi3Tzv_Y" target="_blank" rel="noopener"><span class="fix-icon">🎵</span>Rosalía on her process</a>
+      <a class="fix-tag" href="https://youtu.be/jCcoi3Tzv_Y?si=bVzFIbIm0GaQxlGl" target="_blank" rel="noopener"><span class="fix-icon">🎵</span>Rosalía on her process</a>
       <a class="fix-tag" href="https://www.ecoliteracy.org/article/great-turning" target="_blank" rel="noopener"><span class="fix-icon">🕯️</span>The Great Turning</a>
       <a class="fix-tag" href="https://youtube.com/shorts/4TgARt23svk?si=HR1t72R1uQgOwexi" target="_blank" rel="noopener"><span class="fix-icon">✍️</span>Andrea Gibson</a>
       <a class="fix-tag" href="https://youtu.be/M6k5l0-_bLg?si=dScaN76oIOQ3nPJU" target="_blank" rel="noopener"><span class="fix-icon">🎧</span>Vinyasa by Jonah Kest</a>
-      <a class="fix-tag" href="https://youtu.be/QuHydabht-w?si=B31lsld-aWSlbYFV" target="_blank" rel="noopener"><span class="fix-icon">🎬</span>Viola Davis on Worthiness</a>
+      <a class="fix-tag" href="https://youtu.be/QuHydabht-w?si=HqjINaAYrEOSui2A" target="_blank" rel="noopener"><span class="fix-icon">🎬</span>Viola Davis on Worthiness</a>
       <span class="fix-tag"><span class="fix-icon">🔮</span>Vedic Astrology + Human Design</span>
       <span class="fix-tag"><span class="fix-icon">🌍</span>Indigenous Wisdom</span>
       <span class="fix-tag"><span class="fix-icon">🪴</span>We will all be ancestors.</span>
