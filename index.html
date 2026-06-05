@@ -304,7 +304,7 @@ nav.scrolled .nav-links a:hover { color: var(--tide); }
   max-width: 480px; line-height: 1.7;
   margin-top: 10px; margin-bottom: 52px;
 }
-.o-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.o-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; }
 .o-card {
   background: var(--white); padding: 48px 44px;
   border: 1px solid rgba(74,127,150,0.1);
@@ -694,6 +694,7 @@ body.is-clicking #cur-dot {
 /* ── RESPONSIVE ── */
 @media (max-width: 980px) {
   .p-grid { grid-template-columns: 1fr 1fr; }
+  .o-grid { grid-template-columns: 1fr 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: 44px; }
   .about-aside { position: static; }
   .t-grid { grid-template-columns: 1fr 1fr; }
